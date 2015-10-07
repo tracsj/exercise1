@@ -4,8 +4,7 @@
 # 
 
 # Shell into AWS
-# ssh -i ~/Downloads/205_key.pem root@ec2-54-86-141-109.compute-1.amazonaws.com
-
+# ssh -i ~/Downloads/205_key.pem root@ec2-52-23-170-66.compute-1.amazonaws.com
 
 echo "Loading data lake for w205 medicare project"
 
@@ -26,17 +25,26 @@ ls - l
 
 
 # Unzip file
-unzip hospital_data.zip
+unzip hospital_data.zip -d unzipped
 ls 
 echo file unzipped
 
 #Strip spaces from file names
 IFS="\n"
-for file in *.csv;
+for file in unzipped/*.csv;
 do
     mv "$file" "${file//[[:space:]]}"
 done
 echo file names spaces removed
+
+
+mv unzipped/HospitalGeneralInformation.csv hospitals.csv
+mv unzipped/TimelyandEffectiveCare-Hospital.csv effective_care.csv
+mv unzipped/ReadmissionsandDeaths-Hospital.csv readmissions.csv
+mv unzipped/MeasureDates.csv measures.csv
+mv unzipped/hvbp_hcahps_05_28_2015.csv surveys_responses.csv
+echo Important files moved and renamed
+
 
 #remove headers
 rm -r no_header_tables; mkdir no_header_tables
@@ -59,3 +67,10 @@ hadoop fs -put * /hdfs
 hadoop fs -ls /hdfs
 
 echo Files loaded into HDFS
+
+#scp -i ~/Downloads/205_key.pem  ~/Documents/git/exercise1/loading_and_modeling/load_data_lake.sh  root@ec2-52-23-170-66.compute-1.amazonaws.com:/root
+#scp -i ~/Downloads/205_key.pem  ~/Documents/git/exercise1/loading_and_modeling/hive_base_ddl.sql root@ec2-52-23-170-66.compute-1.amazonaws.com:/user/root/hospital_compare
+ 
+
+hive –f hive_base_ddl.sql
+
