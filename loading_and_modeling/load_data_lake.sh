@@ -47,6 +47,7 @@ echo Important files moved and renamed
 
 
 #remove headers
+# For loop help: http://www.cyberciti.biz/faq/bash-for-loop-array/
 rm -r no_header_tables; mkdir no_header_tables
 for file in *.csv;
 do
@@ -58,19 +59,28 @@ cd no_header_tables
 
 
 #Create hadoop Directory
+hadoop fs -rmr /hdfs
 hadoop fs -mkdir /hdfs
 
 #Place all files into HDFS
-hadoop fs -put * /hdfs
+ARRAY=("hospitals" "effective_care" "readmissions" "measures" "surveys_responses")
+for i in ${ARRAY[@]};
+do 
+ hadoop fs -mkdir "/hdfs/$i"
+ hadoop fs -put "$i.csv" "/hdfs/$i/"
+done
 
 #Check
 hadoop fs -ls /hdfs
 
 echo Files loaded into HDFS
 
-#scp -i ~/Downloads/205_key.pem  ~/Documents/git/exercise1/loading_and_modeling/load_data_lake.sh  root@ec2-52-23-170-66.compute-1.amazonaws.com:/root
-#scp -i ~/Downloads/205_key.pem  ~/Documents/git/exercise1/loading_and_modeling/hive_base_ddl.sql root@ec2-52-23-170-66.compute-1.amazonaws.com:/user/root/hospital_compare
- 
+#copy file from local Mac to EC2
+ # scp -i ~/Downloads/205_key.pem  ~/Documents/git/exercise1/loading_and_modeling/hive_base_ddl.sql root@ec2-52-23-170-66.compute-1.amazonaws.com:/user/root/hospital_compare
 
-hive –f hive_base_ddl.sql
 
+hive –f /user/root/hospital_compare/hive_base_ddl.sql
+echo DDLs loaded successfully
+
+hive –f /user/root/hospital_compare/tables.sql
+echo Tables created successfully

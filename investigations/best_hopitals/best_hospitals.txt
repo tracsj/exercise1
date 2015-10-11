@@ -1,0 +1,31 @@
+Write your answer to the question about hospital quality of care 
+and provide the table of 10 results that support this.
+Your written answer should provide your conclusion, your justification for why this approach is appropriate, and why these results support your conclusion.
+
+hospital_name	 category 	num_p	agg_score	avg_score	score_variance
+FALLS COMMUNITY HOSPITAL AND CLINIC	effectiveness	13	2827	235	185909
+BEAR VALLEY COMMUNITY HOSPITAL	effectiveness	3	526	175	24626
+HOSP COMUNITARIO BUEN SAMARITANO	effectiveness	16	2676	167	58761
+MEDINA REGIONAL HOSPITAL	effectiveness	3	408	136	8892
+NEWARK BETH ISRAEL MEDICAL CENTER	effectiveness	39	5123	134	39324
+REDWOOD MEMORIAL HOSPITAL	effectiveness	6	782	130	9595
+HOSPITAL HERMANOS MELENDEZ INC	effectiveness	19	2474	130	20428
+MERCY HOSPITAL CASSVILLE	effectiveness	4	512	128	7346
+COMMUNITY MEMORIAL HOSPITAL, INC	effectiveness	9	1149	127	4851
+HOSPITAL MENONITA DE CAYEY	effectiveness	16	2004	125	18575
+
+
+I decided to use Avg as the best measure of quality of care across procedures as it's a well accepted measure of central tendency. I noticed that the effectiveness and readmissions scores data had very different levels, so it made sense to chose one to look at so in this case we're looking at the average effectiveness scores.
+
+ Therefore on an average score basis FALLS COMMUNITY HOSPITAL AND CLINIC is the hospital with the highest average quality of care. Given FCHAC has 13 number of procedures this is a reasonable sample to say that its high average score is a reflection of consistently excellent procedures. Some of the other top 10 have only a small number of procedures e.g. Bear Valley with 3. Therefore I am going to impose a minimum of at least 5 procedures to be considered for the top 10. The result is as follows:
+
+ALLS COMMUNITY HOSPITAL AND CLINIC	effectiveness	13	2827	235	185909
+HOSP COMUNITARIO BUEN SAMARITANO	effectiveness	16	2676	167	58761
+NEWARK BETH ISRAEL MEDICAL CENTER	effectiveness	39	5123	134	39324
+REDWOOD MEMORIAL HOSPITAL	effectiveness	6	782	130	9595
+HOSPITAL HERMANOS MELENDEZ INC	effectiveness	19	2474	130	20428
+COMMUNITY MEMORIAL HOSPITAL, INC	effectiveness	9	1149	127	4851
+BOONE MEMORIAL HOSPITAL	effectiveness	6	752	125	9649
+HOSPITAL MENONITA DE CAYEY	effectiveness	16	2004	125	18575
+NOVANT HEALTH HAYMARKET MEDICAL CENTER	effectiveness	9	1116	124	4477
+KINGS COUNTY HOSPITAL CENTER	effectiveness	42	5051	123	23735
