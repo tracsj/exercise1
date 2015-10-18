@@ -6,48 +6,44 @@
 --correlated with patient survey responses?
 set hive.cli.print.header=true;
 
+--Get Hopsital fields needed & combine with patient scores
 CREATE TEMPORARY TABLE st_hospital_redux AS
 SELECT 
-hospital_name,
-provider_id
+a.hospital_name,
+a.provider_id,
+b.base_score
+
 FROM 
-st_hospital_d 
-GROUP BY hospital_name,
-provider_id;
-
-CREATE TEMPORARY TABLE st_measures_redux AS
-SELECT 
-measure_name,
-measure_id
-FROM 
-st_procedures_d
-GROUP BY measure_name,
-measure_id;
+st_hospital_d a
+LEFT JOIN st_surveys_f b ON (a.provider_id = b.provider_id)
+GROUP BY a.hospital_name,
+a.provider_id,
+b.base_score;
 
 
-
-DROP TABLE st_var_procedures;
-CREATE TABLE st_var_procedures AS
-SELECT 
-a.measure_name,
-MAX(a.avg_score)-MIN(a.avg_score) as score_range
-FROM
-(
+--Create scores fro Hospital quality
+DROP TABLE st_patients_vs_hospitals;
+CREATE TABLE st_patients_vs_hospitals AS
 SELECT
+corr(a.base_score,a.avg_score) as correlated
+
+FROM (
+SELECT 
 b.hospital_name,
-c.measure_name,
 a.category,
+INT(b.base_score) as base_score,
 FLOOR(COUNT(IF(a.score>0,1,0))) as num_p,
+FLOOR(SUM(a.score)) as agg_score,
 FLOOR(AVG(a.score)) as avg_score,
 FLOOR(var_samp(a.score)) score_variance
 
 FROM 
 st_measures_f as a
 LEFT JOIN st_hospital_redux as b ON (a.provider_id = b.provider_id)
-LEFT JOIN st_measures_redux as c ON (a.measure_id = c.measure_id)
 WHERE a.category = 'effectiveness' 
-GROUP BY B.hospital_name, c.measure_name, a.category) AS a
-GROUP BY a.measure_name ORDER BY score_range DESC;
+GROUP BY B.hospital_name, a.category, b.base_score ORDER BY avg_score DESC)
+AS a
+;
 
 
-SELECT * FROM st_var_procedures  LIMIT 10;
+SELECT * FROM st_patients_vs_hospitals;

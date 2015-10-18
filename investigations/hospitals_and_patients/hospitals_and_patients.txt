@@ -1,0 +1,14 @@
+Write your answer to the question about hospital quality of care 
+and provide the table of 10 results that support this.
+Your written answer should provide your conclusion, your justification for why this approach is appropriate, and why these results support your conclusion.
+
+
+SELECT * FROM st_patients_vs_hospitals;
+OK
+-0.21807410494657722
+
+Are average scores for hospital quality or procedural variability correlated with patient survey responses?
+
+I ran a Pearson correlation coefficient against the Avg hospital score and the Base survey score that each hospital recieved. The Avg procedure score is best measure of quality of care across procedures as it's a well accepted measure of central tendency. The base patient survey score is on the patient survey would seem to be the fairest way to judge overall survey results.
+
+We see a small negative correlation coefficient of -0.21, this shows a small effect size that appears to say that as hopsital scores increase patient survey results decrease. We could run further statistical analysis to see if this effect is statistically significant, but since the size of this effect is practially insiginiciant I would argue that there's no advantage to knowing whether we can be confident of this weak relationship.

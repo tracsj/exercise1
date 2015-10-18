@@ -1,0 +1,24 @@
+Write your answer to the question about hospital quality of care 
+and provide the table of 10 results that support this.
+Your written answer should provide your conclusion, your justification for why this approach is appropriate, and why these results support your conclusion.
+
+hive> SELECT * FROM st_var_procedures  LIMIT 10;
+OK
+measure_name	score_range
+Admit Decision Time to ED Departure Time for Admitted Patients	1132
+Median Time from ED Arrival to ED Departure for Admitted ED Patients	1127
+Median Time from ED Arrival to ED Departure for Discharged ED Patients	399
+Median Time to Transfer to Another Facility for Acute Coronary Intervention- Reporting Rate	200
+Median Time to Pain Management for Long Bone Fracture	170
+Median Time from ED Arrival to Provider Contact for ED patients	143
+Median Time to ECG	142
+Venous Thromboembolism Warfarin Therapy Discharge Instructions	100
+Venous Thromboembolism Prophylaxis	100
+Venous Thromboembolism Patients Receiving Unfractionated Heparin with Dosages/Platelet Count Monitoring by Protocol or Nomogram	100
+Time taken: 0.102 seconds, Fetched: 10 row(s)
+
+
+
+I took the average score for every procedure across every hospital. I then took the Min and Max for each procedure across all hospitals and computed the range. This gives us a measure of 'how variable' a score is between hospitasl.
+
+ The result is we see that "Admit Decision Time to ED Departure Time for Admitted Patients" and "Median Time from ED Arrival to ED Departure for Admitted ED Patients" are by far the most variable measures. Clearly there is a large degree of variability in hospitals dealing with patients in a timely fashion!

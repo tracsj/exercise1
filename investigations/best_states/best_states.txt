@@ -1,0 +1,18 @@
+Write your answer to the questions about hospital quality of care 
+and provide the table of 10 results that support this.
+Your written answer should provide your conclusion, your justification for why this approach is appropriate, and why these results support your conclusion.
+
+state	category	num_p	agg_score	avg_score	score_variance
+MD	effectiveness	1357	133706	100	4192
+DC	effectiveness	279	27468	100	5560
+DE	effectiveness	245	23897	99	4012
+NV	effectiveness	856	79984	96	3644
+NY	effectiveness	5691	536806	96	4300
+NJ	effectiveness	2511	235969	96	3704
+CT	effectiveness	1077	99913	95	2986
+VI	effectiveness	48	4582	95	3270
+NH	effectiveness	652	60866	95	2160
+CA	effectiveness	10682	994058	95	3131
+
+Which states are models of High Quality care?
+The Delmarva peninsula (MD & DE) + DC are the states that represent models of good care. We see that on an average basis its the'r scores are 100, 99 and 100 respectively putting them at the top of the 50 states. This is representative as we're taking a view across all procedures & hospitals in the state.
