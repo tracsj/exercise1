@@ -64,7 +64,7 @@ hadoop fs -mkdir /hdfs
 
 #Place all files into HDFS
 ARRAY=("hospitals" "effective_care" "readmissions" "measures" "surveys_responses")
-for i in ${ARRAY[@]};
+for i in "${ARRAY[@]}"
 do 
  hadoop fs -mkdir "/hdfs/$i"
  hadoop fs -put "$i.csv" "/hdfs/$i/"
@@ -79,8 +79,8 @@ echo Files loaded into HDFS
  # scp -i ~/Downloads/205_key.pem  ~/Documents/git/exercise1/loading_and_modeling/hive_base_ddl.sql root@ec2-52-23-170-66.compute-1.amazonaws.com:/user/root/hospital_compare
 
 
-hive –f /user/root/hospital_compare/hive_base_ddl.sql
-echo DDLs loaded successfully
+#hive –f /user/root/hospital_compare/hive_base_ddl.sql
+#echo DDLs loaded successfully
 
-hive –f /user/root/hospital_compare/tables.sql
-echo Tables created successfully
+#hive –f /user/root/hospital_compare/tables.sql
+#echo Tables created successfully
